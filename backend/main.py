@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.router import router
+from app.api.chat import router
 
 app = FastAPI(
     title="Butler AI",
