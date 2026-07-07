@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.router import router
+
 app = FastAPI(
     title="Butler AI",
-    description="Local AI Assistant Backend",
-    version="0.1.0"
+    version="0.1.0",
 )
 
-# Allow the local frontend to communicate with the backend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -19,18 +19,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(router)
+
 
 @app.get("/")
 async def root():
     return {
         "assistant": "Butler",
         "status": "Online",
-        "version": "0.1.0"
+        "version": "0.1.0",
     }
 
 
 @app.get("/health")
 async def health():
     return {
-        "status": "healthy"
+        "status": "healthy",
     }
